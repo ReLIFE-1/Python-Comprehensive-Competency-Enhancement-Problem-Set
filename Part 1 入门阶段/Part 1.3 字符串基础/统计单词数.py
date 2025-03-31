@@ -1,17 +1,22 @@
-word = input().strip().lower()
-words = input().strip().lower().split()
-cnt = 0 
-index = -1
-cur = 0
-for i in range(len(words)):
-    cur = len(words[i]) + 1
-    if words[i] == word:
-        cnt += 1
-        if index == -1:
-            index = cur
+supstr = input().lower() 
+string = input().lower() 
 
+supstr_list = string.split(" ") 
+count = 0 # 出现的次数
+first_pos = -1 # 第一次出现的位置
+length = 0 # 用于计算第一次出现位置的累加长度
 
-if cnt == 0:
-    print("-1")
+for i, w in enumerate(supstr_list): 
+  # 统计待查找字符串出现的个数
+  if w == supstr: 
+    count += 1
+    # 如果是第一次出现，计算位置
+    if first_pos == -1:
+        for j in range(i):
+            length += len(supstr_list[j]) + 1
+        first_pos = length
+
+if count > 0:
+  print(count, first_pos)
 else:
-    print(f"{cnt} {index}")
+  print(-1)
