@@ -11,3 +11,6 @@ def fast_pow(a, b, p):
 
 a, b, p = map(int, input().split())
 print(f"{a}^{b} mod {p}={fast_pow(a,b,p)}")
+'''
+python直接使用内置函数pow(a,b,p)
+'''
