@@ -1,36 +1,30 @@
-n, m = map(int, input().split())
-field = [input().strip() for _ in range(n)]
+N, M = map(int, input().split())
 
-# 用于标记访问过的方格
-visited = [[False] * m for _ in range(n)]
+grid = []
+for _ in range(N):
+    grid.append(list(input()))
 
-# 方向向量，表示一个方格的八个可能邻居
-directions = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
+# 八个方向的偏移量
+dr = [-1, -1, -1, 0, 0, 1, 1, 1]
+dc = [-1, 0, 1, -1, 1, -1, 0, 1]
 
-def is_valid(x, y):
-    """ 检查坐标是否在矩阵范围内,并且未访问且是水(‘W’) """
-    return 0 <= x < n and 0 <= y < m and not visited[x][y] and field[x][y] == 'W'
+def dfs(r, c):
+    # 将当前'W'标记为'.'，表示已访问
+    grid[r][c] = '.'
+    
+    # 遍历八个方向
+    for i in range(8):
+        nr, nc = r + dr[i], c + dc[i]    
+        # 检查新坐标是否在网格范围内且是'W'
+        if 0 <= nr < N and 0 <= nc < M and grid[nr][nc] == 'W':
+            dfs(nr, nc)
 
-def dfs(x, y):
-    """ 深度优先搜索标记当前水塘 """
-    # 标记当前方格为已访问
-    visited[x][y] = True
-    # 检查所有邻居方格
-    for dx, dy in directions:
-        nx, ny = x + dx, y + dy
-        if is_valid(nx, ny):
-            dfs(nx, ny)
+pond_count = 0
+for r in range(N):
+    for c in range(M):
+        # 如果当前单元格是'W'，说明找到了一个新的水塘
+        if grid[r][c] == 'W':
+            pond_count += 1
+            dfs(r, c) # 从当前'W'开始，标记所有相连的'W'
 
-def count_lakes():
-    lakes_count = 0
-    # 遍历矩阵的所有方格
-    for i in range(n):
-        for j in range(m):
-            # 如果找到一个未访问过的水方格，开始新的DFS
-            if is_valid(i, j):
-                dfs(i, j)
-                # 每次完成 DFS 意味着完成一个水塘的标记
-                lakes_count += 1
-    return lakes_count
-
-print(count_lakes())
+print(pond_count)
