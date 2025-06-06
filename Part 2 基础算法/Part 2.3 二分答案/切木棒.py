@@ -1,3 +1,4 @@
+# 	[蓝桥杯 2024 国 Python B]
 n, m = map(int, input().split())
 L = list(map(int, input().split()))
 
