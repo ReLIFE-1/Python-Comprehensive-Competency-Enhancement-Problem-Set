@@ -1,24 +1,30 @@
 n = int(input())
-heights = list(map(int, input().split()))
-left = [1] * n  # left[i]表示以i结尾的最长递增子序列的长度
-right = [1] * n  # right[i]表示以i开头的最长递减子序列的长度
+h = list(map(int, input().split()))
 
-# 计算left数组
+# f1[i] 表示以 h[i] 结尾的最长上升子序列的长度
+f1 = [1] * n
+# f2[i] 表示以 h[i] 开头的最长下降子序列的长度
+f2 = [1] * n
+
+# 从左向右计算最长上升子序列
 for i in range(n):
     for j in range(i):
-        if heights[j] < heights[i] and left[j] + 1 > left[i]:
-            left[i] = left[j] + 1
+        if h[i] > h[j]:
+            f1[i] = max(f1[i], f1[j] + 1)
 
-# 计算right数组
-for i in range(n-1, -1, -1):
-    for j in range(i+1):
-        if j < n and heights[j] > heights[i] and right[j] + 1 > right[i]:
-            right[i] = right[j] + 1
+# 从右向左计算最长上升子序列 (等价于从左向右的最长下降子序列)
+for i in range(n - 1, -1, -1):
+    for j in range(n - 1, i, -1):
+        if h[i] > h[j]:
+            f2[i] = max(f2[i], f2[j] + 1)
 
-max_len = 0
+# 合并计算以每个点为顶点的合唱队形的最大长度
+max_k = 0
 for i in range(n):
-    current = left[i] + right[i] - 1
-    if current > max_len:
-        max_len = current
+    # h[i] 被计算了两次，所以要减 1
+    k = f1[i] + f2[i] - 1
+    if k > max_k:
+        max_k = k
 
-print(n - max_len)
+# 总人数减去最长合唱队形的人数，即为需要出列的人数
+print(n - max_k)
