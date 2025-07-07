@@ -1,0 +1,97 @@
+# ===================================================================
+# General ignores for any project
+# ===================================================================
+# Compiled source #
+.com
+.class
+.dll
+.exe
+.o
+.so
+
+# Packages #
+# it's better to unpack these files and commit the raw source
+# git has its own built-in compression methods
+.7z
+.dmg
+.gz
+.iso
+.jar
+.rar
+.tar
+.zip
+
+# Logs and databases #
+.log
+.sql
+.sqlite
+
+# OS generated files #
+.DS_Store
+.DS_Store
+._
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# ===================================================================
+# IDE and Editor specific ignores
+# ===================================================================
+# IntelliJ IDEA
+.idea
+.iml
+.iws
+
+# VS Code
+.vscode
+
+# ===================================================================
+# Java, Maven & Spring Boot specific ignores
+# ===================================================================
+# Maven build output
+target
+
+# Spring Boot specific
+.jar
+.war
+
+# Log files
+.log
+logs
+
+# Local configuration
+application-local.properties
+application-local.yml
+
+# ===================================================================
+# Node, Vue & Vite specific ignores
+# ===================================================================
+# Node.js dependencies
+node_modules
+
+# Vite build output
+dist
+
+# Vite cache
+.vite
+.next
+
+# Log files
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+pnpm-debug.log
+
+# Local environment variables
+# IMPORTANT Never commit your secrets!
+.env
+.env.local
+.env..local
+
+# ===================================================================
+# Other generated files
+# ===================================================================
+# Test reports
+coverage
+.cover
